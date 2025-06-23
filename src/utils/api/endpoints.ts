@@ -1,0 +1,50 @@
+ 
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
+const LOCAL_ENDPOINT = process.env.NEXT_INTERNAL_API_ENDPOINT;
+
+export const API_ENDPOINTS = {
+  TOKEN: API_ENDPOINT + "users/login",
+  LOGOUT: API_ENDPOINT + "users/logout",
+  ME: API_ENDPOINT + "users/me",
+  FORGETPASSWORD: API_ENDPOINT + "users/forget-password",
+  RESETPASSWORD: API_ENDPOINT + "users/create-new-password",
+  SEARCH_RESULTS: API_ENDPOINT + "search-results",
+  SEARCH_RESULTS_COUNT: API_ENDPOINT + "search-results/count",
+  USERS: API_ENDPOINT + "users",
+  REGISTER: API_ENDPOINT + "users",
+  USER_COUNT: API_ENDPOINT + "users/count",
+  GROUPS: API_ENDPOINT + "groups",
+  GROUPS_COUNT: API_ENDPOINT + "groups/count",
+  MODULES: API_ENDPOINT + "modules",
+  PAGES: API_ENDPOINT + "pages",
+  PERMISSIONS: API_ENDPOINT + "permissions",
+  OPTIONS: API_ENDPOINT + "options",
+  CATEGORIES: API_ENDPOINT + "categories",
+  COMPANIES: API_ENDPOINT + "companies",
+  PRODUCTS: API_ENDPOINT + "products",
+  POSTS: API_ENDPOINT + "posts",
+  TAGS: API_ENDPOINT + "tags",
+};
+
+export const LOCAL_ENDPOINTS = {
+  TOKEN: LOCAL_ENDPOINT + "users/login",
+  LOGOUT: LOCAL_ENDPOINT + "users/logout",
+  ME: LOCAL_ENDPOINT + "users/me",
+  FORGETPASSWORD: LOCAL_ENDPOINT + "users/forget-password",
+  RESETPASSWORD: LOCAL_ENDPOINT + "users/create-new-password",
+  SEARCH_RESULTS: LOCAL_ENDPOINT + "search-results",
+  USERS: LOCAL_ENDPOINT + "users",
+  REGISTER: LOCAL_ENDPOINT + "users",
+  USER_COUNT: LOCAL_ENDPOINT + "users/count",
+  GROUPS: LOCAL_ENDPOINT + "groups",
+  GROUPS_COUNT: LOCAL_ENDPOINT + "groups/count",
+  MODULES: LOCAL_ENDPOINT + "modules",
+  PAGES: LOCAL_ENDPOINT + "pages",
+  PERMISSIONS: LOCAL_ENDPOINT + "permissions",
+  OPTIONS: LOCAL_ENDPOINT + "options",
+  CATEGORIES: LOCAL_ENDPOINT + "categories",
+  COMPANIES: LOCAL_ENDPOINT + "companies",
+  PRODUCTS: LOCAL_ENDPOINT + "products",
+  POSTS: LOCAL_ENDPOINT + "posts",
+  TAGS: LOCAL_ENDPOINT + "tags",
+};

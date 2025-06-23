@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #3498db;
+  --primaryHover: #3498dc;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-size: 12px;
+  font-family: sans-serif;
+  padding: 0px;
+  margin: 0px;
+}
+a{
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 12px;
+}
+a:hover{
+  color: var(--primaryHover);
+}
+
+button.MuiButtonBase-root {
+  font-size: 12px;
+}
+
+p.MuiTypography-root,
+li.MuiButtonBase-root,
+label.MuiFormControlLabel-root span,
+p.MuiTypography-root a {
+  font-size: 12px;
+}
+ 
+main.MuiBox-root{
+  padding: 15px;
+  margin-top: 10px; 
+  flex-grow: 1;
+}
+.page-content p {
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 22px;
+} 
+
+.page-content ol li,
+.page-content ul li {
+  line-height: 22px;
+  font-size: 14px;
+}

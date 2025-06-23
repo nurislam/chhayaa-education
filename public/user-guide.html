@@ -1,0 +1,644 @@
+<!--
+https://fonts.google.com/icons?selected=Material+Icons+Outlined:star:&icon.size=24&icon.color=%231f1f1f&icon.set=Material+Icons
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Guide</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+      }
+
+      /* Sidebar */
+      #sidebar {
+        width: 220px;
+        background-color: #f9f9f9;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        height: 100vh;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        padding-top: 20px;
+      }
+
+      #sidebar ul {
+        list-style: none;
+      }
+
+      #sidebar li {
+        margin: 10px 0;
+      }
+
+      #sidebar a {
+        text-decoration: none;
+        color: #333;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        transition: background 0.2s;
+      }
+
+      #sidebar a .material-icons {
+        margin-right: 10px;
+      }
+
+      #sidebar a.active {
+        background-color: #e0e0e0;
+        font-weight: bold;
+        color: #007bff;
+      }
+
+      #sidebar a:hover {
+        background-color: #ddd;
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 60px;
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        z-index: 999;
+      }
+
+      header img {
+        height: auto;
+      }
+
+      header button {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      header button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Main content */
+      main {
+        margin-left: 220px;
+        padding: 0px 40px 40px 40px;
+        width: 100%;
+      }
+
+      section {
+        padding-top: 80px;
+      }
+
+      section h2 {
+        margin-bottom: 10px;
+      }
+      section p {
+        line-height: 25px;
+        margin-bottom: 20px;
+      }
+      section ul{
+        margin-bottom: 30px;
+      }
+      section li p{
+        line-height: 19px;
+        margin-bottom: 0px;
+      }
+      section li {
+        margin: 13px 31px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      code{
+        background-color: #f1f1f1;
+      }
+          
+      blockquote { 
+      color: #383a42;
+      background-color: #f1f1f1;
+      line-height: 25px;
+      font-size: 14px; 
+      display: block;
+      padding: 8px 30px;
+      margin: 5px 0px 10px;
+      border: #CCC solid 1px;
+      border-radius: 5px;
+    } 
+    </style>
+    <!-- FontAwesome icons
+    <script
+      src="https://kit.fontawesome.com/8fce2612bb.js"
+      crossorigin="anonymous"
+    ></script> -->
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <a href="/user-guide.html"><img src="logo.png" alt="Logo" width="180" /></a>
+      <button onclick="window.open('#', '_blank')">View Demo</button>
+    </header>
+
+    <!-- Sidebar -->
+    <nav id="sidebar">
+      <ul>
+        <li>
+          <a href="#intro" class="nav-link"><span class="material-icons">home</span> Introduction</a>
+        </li>
+        <li>
+          <a href="#technology" class="nav-link" ><span class="material-icons">api</span> Technology</a >
+        </li>
+        <li>
+          <a href="#usage" class="nav-link"><span class="material-icons">play_arrow</span> Usage</a>
+        </li>
+        <li>
+          <a href="#global-seo" class="nav-link">
+            <span class="material-icons">public</span> Global SEO</a>
+        </li>
+        <li>
+          <a href="#features" class="nav-link">
+            <span class="material-icons"> star </span> Features</a>
+        </li>
+        
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <section id="intro">
+        <h2>Introduction</h2>
+        <p>
+          <b>Drop CMS</b> - custom-built Content Management System (CMS) is
+          designed to empower users in creating a wide variety of websites with
+          ease and flexibility. Whether you're building a company website, a
+          personal portfolio, or any type of blog, this CMS offers all the
+          essential tools and features to help you manage and publish your
+          content effortlessly. Its user-friendly interface and customizable
+          structure make it suitable for both beginners and advanced users
+          alike.
+        </p>
+        <p>
+          A Content Management System (CMS) is a software application that
+          allows users to create, manage, and modify digital content on a
+          website without needing specialized technical knowledge. With a CMS,
+          you don’t have to write code from scratch — you can manage everything
+          through an intuitive interface.
+        </p>
+        <p>It enables individuals, teams, or organizations to:</p>
+        <ul>
+          <li>Build and manage websites without coding knowledge</li>
+          <li>Publish and edit content easily</li>
+          <li>Organize content with categories, tags, or sections</li>
+          <li>Customize page layouts and website structure</li>
+          <li>Control user roles and access permissions</li>
+          <li>Manage media libraries and digital assets</li>
+          <li>Track performance and view reports</li>
+          <li>Scale websites without major development changes</li>
+          <li>Integrate with third-party tools and services</li>
+          <li>Optimize for SEO and improve search visibility</li>
+          <li>Enhance user experience with themes and plugins</li>
+          <li>Support multiple languages and localization</li>
+          <li>Implement security measures and backups</li>
+          <li>Collaborate with teams and manage workflows</li>
+          <li>Utilize analytics and insights for data-driven decisions</li>
+          <li>Ensure mobile responsiveness and cross-browser compatibility</li>
+          <li>Facilitate e-commerce functionalities for online stores</li>
+          <li>Provide customer support and engagement tools</li>
+          <li>Integrate social media and marketing tools</li>
+          <li>Implement content versioning and revision history</li>
+          <li>Utilize templates and themes for design consistency</li>
+          <li>Support multimedia content (images, videos, audio)</li>
+        </ul>        
+      </section>
+      <section id="technology">
+        <h2 data-start="170" data-end="198" class="">
+          <strong data-start="177" data-end="198">Technologies Used</strong>
+        </h2>
+        <p data-start="200" data-end="337" class="">
+          A powerful tech stack ensures flexibility, speed, and modern UI/UX
+          experience. Below are the core technologies used in building this CMS:
+        </p>
+        <h3 data-start="339" data-end="358" class="">Tech Stack:</h3>
+        <ul data-start="304" data-end="904" style="list-style: none">
+          <li data-start="304" data-end="418" class="" style="">
+            <p data-start="306" data-end="418" class="">
+              🟢 <strong data-start="309" data-end="320">Node.js 22.11.0</strong> – A
+              powerful JavaScript runtime built on Chrome’s V8 engine, ideal for
+              backend services and APIs.
+            </p>
+          </li>
+          <li data-start="420" data-end="542" class="" style="">
+            <p data-start="422" data-end="542" class="">
+              ▲ <strong data-start="424" data-end="435">Next.js 15.2.4</strong> – A
+              React-based framework with server-side rendering and powerful
+              routing, used for building the frontend.
+            </p>
+          </li>
+          <li data-start="544" data-end="658" class="" style="">
+            <p data-start="546" data-end="658" class="">
+              ♻️ <strong data-start="549" data-end="561">LoopBack 4</strong> – A
+              highly extensible Node.js framework for creating APIs and
+              connecting to databases with ease.
+            </p>
+          </li>
+          <li data-start="660" data-end="790" class="" style="">
+            <p data-start="662" data-end="790" class="">
+              🔷
+              <strong data-start="665" data-end="686">MUI (Material UI) 6.4.2</strong>
+              – A robust React component library for building sleek and
+              responsive UIs with Google's Material Design.
+            </p>
+          </li>
+          <li data-start="792" data-end="904" class="" style="">
+            <p data-start="794" data-end="904" class="">
+              🧩 <strong data-start="797" data-end="812">React Icons</strong> –
+              A library of popular icon packs used for enriching the UI with
+              visually meaningful icons.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="usage">
+        <h2>How to use</h2>
+        <h4>Make sure you have the following installed:</h4>  
+        <ul>
+          <li>Node.js (v22+ recommended)</li>
+          <li>npm or yarn</li>
+          <li>Git</li>
+          <li>PHP version: 8 +</li>
+          <li>MySQL 8 +</li>
+          <li>Apache 2.4 +</li>
+          <li>Server type: MariaDB</li>
+        </ul>
+
+        <div style="margin: 20px 0px;">
+          <strong>Step 1 -</strong> Make sure Node.js is installed on your system or server. 
+          You can verify the installation by running the following command in your terminal or command prompt:
+          <blockquote>
+            node -v
+          </blockquote>
+          <p style="margin: 0px;">if not already installed Node.j then you can download from <a href="https://nodejs.org/">nodejs.org</a>        
+            <br/>Install Yarn (if not already installed)- You can install Yarn globally via npm:
+          </p>
+          <blockquote>
+            npm install --global yarn
+          </blockquote>           
+        </div>
+        <div style="padding: 20px 0px 0px;">
+          <strong>Step 2 -</strong> Drop CMS installation (frontend Next.js): clone or navigate to the project folder 
+          <blockquote>
+            git clone <a target="_blank" href="https://gitlab.com/dropndeveloper1/nextcms.git">https://gitlab.com/dropndeveloper1/nextcms.git</a>             
+          </blockquote>
+          <p><b>Configure Environment Variables</b><br/>
+            You'll likely need environment variables for both the LoopBack (server) and Next.js (client) projects.
+            <b><br/>Frontend Next.js<br/></b>
+             Change the <code>.env.dev</code> file name by <code>.env</code> after cloning the repository. And the <code>.env</code> file update by below code
+          </p>
+            <blockquote>
+              NEXT_PUBLIC_API_ENDPOINT="http://localhost:3001/" <br/>
+              NEXT_INTERNAL_API_ENDPOINT="http://localhost:3001/"<br/>
+              NEXT_PUBLIC_REST_API_ENDPOINT="http://localhost:3001/"<br/>
+              NODE_ENV="development" 
+            </blockquote>
+          <code>cd cms</code> Depending on the package manager your project uses:
+          <blockquote>
+            yarn install
+          </blockquote>
+        </div>
+        <div style="padding: 20px 0px 0px;">
+          <strong>Step 4 -</strong> Drop CMS installation (backend LoopBack): clone or navigate to the project folder 
+          <blockquote>
+            git clone <a target="_blank" href="https://gitlab.com/dropndeveloper1/nextcms.git">https://gitlab.com/dropndeveloper1/nextcms.git</a>
+          </blockquote>
+          <p><b>Configure Environment Variables -LoopBack (server)</b><br/> 
+             Change the <code>.env.dev</code> file name by <code>.env</code> after cloning the repository. And the <code>.env</code> file update by below code
+          </p>
+            <blockquote>
+              # Database Configuration <br/>
+              DB_HOST=localhost<br/>
+              DB_PORT=3306<br/>
+              DB_USER=root<br/>
+              DB_PASSWORD=123<br/>
+              DB_NAME=cmsDBv2<br/><br/>
+
+              REDIS_HOST=localhost<br/>
+              REDIS_PORT=6379<br/>
+              # Environment Configuration<br/>
+              # NODE_ENV=production<br/>
+              NODE_ENV=development<br/><br/>
+
+              # Token Expirations<br/>
+              ACCESS_TOKEN_EXPIRATION_TIME=1d<br/>
+              REFRESH_TOKEN_EXPIRATION_TIME=7d<br/><br/>
+
+              # JWT Secret Key<br/>
+              JWT_SECRET=qweasda^%HGFHF^%dsad<br/><br/>
+
+              # Email Service Configuration<br/>
+              EMAIL_SERVICE=smtp.gmail.com<br/>
+              SYSTEM_EMAIL=dropndot@gmail.com<br/>
+              EMAIL_USER=dropndot@gmail.com<br/>
+              EMAIL_PASS=rtofnceiyczdubqq<br/><br/>
+
+              BASE_URL_FORFRONTEND=http://localhost:3000/
+            </blockquote>
+          <code>cd cms-api</code> Depending on the package manager your project uses:
+          <blockquote>
+            npm install
+          </blockquote>
+          Run the Development Server
+          <blockquote>
+            yarn dev
+          </blockquote>
+          <p>By default, your app will be available at:<br/>
+            📍 CMS <a target="_blank" href="http://localhost:3000">http://localhost:3000</a><br/>
+            📍 API <a target="_blank" href="http://localhost:3001">http://localhost:3001</a> </p>
+        </div>
+
+
+        
+        <p>This is how you use the application after installation.<br/>
+          <blockquote style="background-color: #E1ECFF;">
+
+            This is a <a target="_blank" href="https://nextjs.org">Next.js</a> project <a target="_blank" href="https://nextjs.org/docs/app/api-reference/cli/create-next-app">create-next-app</a> </p>
+          </blockquote>
+
+        <h3>Dashboard</h3>
+        <img src="/user-guide-screenshot/dashboard.png" width="900" alt="Dashboard" />
+      </section>  
+      <section id="global-seo">
+        <h2>Global SEO</h2>
+        <p>For Modify Global Seo data. follow the steps admin panel > product > add > Seo.</p>
+        <p>
+          <ul>
+            <li><strong>Meta Title</strong> – Fill up meta title.</li>
+            <li><strong>Meta Description</strong> – Fill up the section of meta description.</li>
+            <li><strong>Keywords</strong> – Input keywords.</li> 
+            <li><strong>Sitemap.xml</strong> – Insert your sitemap.xml file's content in XML format to update the sitemap.</li>
+            <li><strong>Robots.txt</strong> – Insert your robots.txt file's content to update the robots.txt file.</li>
+          </ul>
+        </p>
+      </section>
+      <section id="features">
+        <h2 data-start="922" data-end="954" class="">
+          <strong data-start="929" data-end="954">About Drop CMS</strong>
+        </h2>
+        <p data-start="956" data-end="1256" class="">
+          This <strong data-start="961" data-end="975">Drop CMS</strong> has
+          been thoughtfully designed to be flexible, lightweight, and tailored
+          for diverse use cases. Whether you're launching a personal blog,
+          building a professional portfolio, or managing a corporate website,
+          this CMS provides all the core features and tools in one powerful
+          package.
+        </p>
+        <p data-start="1258" data-end="1275" class="">
+          <h3>Admin Features:</h3>
+        </p>
+        <ul data-start="1276" data-end="1977" style="list-style: none">
+          <li data-start="1276" data-end="1371" class="" style="">
+            <p data-start="1278" data-end="1371" class=""> 
+              <strong data-start="1281" data-end="1307"
+                >🔧 General Features</strong
+              >: Create, edit, and format rich content using a built-in editor.
+            </p>
+            <ul data-start="293" data-end="470">
+              <li data-start="293" data-end="320" class="" style="">
+              <p data-start="295" data-end="320" class="">Easy-to-use admin panel</p>
+              </li>
+              <li data-start="321" data-end="350" class="" style="">
+              <p data-start="323" data-end="350" class="">Role-based access control</p>
+              </li>
+              <li data-start="351" data-end="381" class="" style="">
+              <p data-start="353" data-end="381" class="">SEO-friendly URL structure</p>
+              </li>
+              <li data-start="382" data-end="428" class="" style="">
+              <p data-start="384" data-end="428" class="">Rich text editor for post and page content</p>
+              </li>
+              <li data-start="429" data-end="470" class="" style="">
+              <p data-start="431" data-end="470" class="">Media management (upload images, files)</p>
+              </li>
+              </ul>
+          </li>
+          <li data-start="1531" data-end="1625" class="" style="">
+            <p data-start="1533" data-end="1625" class="">
+              👥
+              <strong data-start="1536" data-end="1560"
+                >User Management</strong
+              >: Define permissions for admins, editors, contributors, and more.
+            </p>
+            <ul data-start="697" data-end="842">
+              <li data-start="697" data-end="730" class="" style="">
+              <p data-start="699" data-end="730" class="">Secure login and registration</p>
+              </li>
+              <li data-start="731" data-end="776" class="" style="">
+              <p data-start="733" data-end="776" class="">User roles (Admin, Editor, Author, Guest)</p>
+              </li>
+              <li data-start="777" data-end="813" class="" style="">
+              <p data-start="779" data-end="813" class="">Profile settings and permissions</p>
+              </li>
+              <li data-start="814" data-end="842" class="" style="">
+              <p data-start="816" data-end="842" class="">Group-based access control</p>
+              </li>
+              </ul>
+          </li>
+          <li data-start="1372" data-end="1446" class="" style="">
+            
+            <p> <strong >📝 Content Management:</strong>Organize content for better discovery and SEO.</p>
+            <ul data-start="499" data-end="671">
+              <li data-start="499" data-end="539" class="" style="">
+              <p data-start="501" data-end="539" class="">Create &amp; manage blog posts and pages</p>
+              </li>
+              <li data-start="540" data-end="569" class="" style="">
+              <p data-start="542" data-end="569" class="">Category &amp; tag management</p>
+              </li>
+              <li data-start="570" data-end="604" class="" style="">
+              <p data-start="572" data-end="604" class="">Post scheduling and publishing</p>
+              </li>
+              <li data-start="605" data-end="631" class="" style="">
+              <p data-start="607" data-end="631" class="">Featured image support</p>
+              </li>
+              <li data-start="632" data-end="671" class="" style="">
+              <p data-start="634" data-end="671" class="">WYSIWYG editor for content formatting</p>
+              </li>
+              </ul>
+          </li>
+          <li data-start="1372" data-end="1446" class="" style="">
+            <p data-start="1374" data-end="1446" class="">
+              🧩
+              <strong data-start="1377" data-end="1395">Modular Design</strong>:
+              Add and manage pages, posts, and media with ease.
+            </p>
+          </li>
+           
+          
+          <li data-start="1626" data-end="1721" class="" style="">
+            <p data-start="1628" data-end="1721" class="">
+              🖼️
+              <strong data-start="1632" data-end="1661"
+                >Media Upload &amp; Management</strong
+              >: Store and reuse images, files, and media across your site.
+            </p>
+          </li>
+          <li data-start="1722" data-end="1793" class="" style="">
+            <p data-start="1724" data-end="1793" class="">
+              📊
+              <strong data-start="1727" data-end="1750"
+                >Analytics &amp; Reports</strong
+              >: Get insights on your content performance.
+            </p>
+            <ul data-start="1156" data-end="1298">
+              <li data-start="1156" data-end="1185" class="" style="">
+              <p data-start="1158" data-end="1185" class="">Expense &amp; earning reports</p>
+              </li>
+              <li data-start="1186" data-end="1227" class="" style="">
+              <p data-start="1188" data-end="1227" class="">Balance sheet with date range filters</p>
+              </li>
+              <li data-start="1228" data-end="1267" class="">
+              <p data-start="1230" data-end="1267" class="">Monthly, yearly financial breakdown</p>
+              </li>
+              <li data-start="1268" data-end="1298" class="">
+              <p data-start="1270" data-end="1298" class="">Export reports to CSV or PDF</p>
+              </li>
+              </ul>
+          </li>
+          <li data-start="1794" data-end="1888" class="" style="">
+            <p data-start="1796" data-end="1888" class="">
+              🧱
+              <strong data-start="1799" data-end="1823"
+                >Customizable Layouts</strong
+              >: Adapt the website's look and feel based on your brand or style.
+            </p>
+          </li>
+          <li>
+            <h4 data-start="844" data-end="864" class="">📦 <strong data-start="852" data-end="864">Products</strong></h4>
+            <ul data-start="865" data-end="1124">
+              <li data-start="865" data-end="928" class="" style="">
+              <p data-start="867" data-end="928" class="">Product creation with attributes, price, category, and tags</p>
+              </li>
+              <li data-start="929" data-end="975" class="" style="">
+              <p data-start="931" data-end="975" class="">Grid/List view toggle for product listings</p>
+              </li>
+              <li data-start="976" data-end="1025" class="" style="">
+              <p data-start="978" data-end="1025" class="">Sorting &amp; filtering by price, category, brand</p>
+              </li>
+              <li data-start="1026" data-end="1085" class="" style="">
+              <p data-start="1028" data-end="1085" class="">Product detail page with image gallery and descriptions</p>
+              </li>
+              <li data-start="1086" data-end="1124" class="" style="">
+              <p data-start="1088" data-end="1124" class="">Manage product categories and brands</p>
+              </li>
+              </ul>
+          </li>
+          <li>
+            <h4 data-start="1300" data-end="1332" class="">⚙️ Settings &amp; Customization</h4>
+            <ul data-start="1333" data-end="1504">
+              <li data-start="1333" data-end="1374" class="">
+              <p data-start="1335" data-end="1374" class="">Update site title, logo, and branding</p>
+              </li>
+              <li data-start="1375" data-end="1418" class="">
+              <p data-start="1377" data-end="1418" class="">Control post/page visibility and layout</p>
+              </li>
+              <li data-start="1419" data-end="1463" class="">
+              <p data-start="1421" data-end="1463" class="">Configure email settings and SEO options</p>
+              </li>
+              <li data-start="1464" data-end="1504" class="">
+              <p data-start="1466" data-end="1504" class="">Set default user roles and permissions</p>
+              </li>
+              </ul>
+          </li>
+          <li data-start="1889" data-end="1977" class="" style="">
+            <p data-start="1891" data-end="1977" class="">
+              🔒
+              <strong data-start="1894" data-end="1917"
+                >Secure Architecture</strong
+              >: Built with modern security standards to protect your data.
+            </p>
+          </li>
+        </ul>
+        <p>
+          However, that equivalent client likewise needs a productive,
+          opportune, and right reaction. This contention among unbending nature
+          and proficiency is the place the discussion around client care
+          contents gets stickier, Scripting your client support discussions is a
+          training layered with debate.
+        </p>
+        <h3>Features</h3>
+        <ul class="ulstyle">
+          <li>Dynamic home page</li>
+          <li>Notifications</li>
+          <li>Responsive design</li>
+          <li>Standard e commerce</li>
+          <li>Smart Cart system</li>
+          <li>Wishlist</li>
+          <li>Featured products</li>
+          <li>Discount</li>
+          <li>Variant products</li>
+          <li>Easy product listing</li>
+          <li>Prize calculator</li>
+          <li>Tax Master</li>
+          <li>Inventory management</li>
+          <li>Ledger</li>
+          <li>Coupon</li>
+          <li>Offer</li>
+          <li>Multiple Address delivery</li>
+          <li>Excel Report</li>
+          <li>Deal of the Day</li>
+          <li>Multiple International payment gateways</li>
+          <li>PayPal</li>
+          <li>Stripe</li>
+          <li>Offline payment mode</li>
+        </ul>
+      </section>
+          
+    </main>
+
+    <!-- JavaScript for scroll-based menu activation -->
+    <script>
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.getAttribute("id");
+            const link = document.querySelector(`.nav-link[href="#${id}"]`);
+
+            if (entry.isIntersecting) {
+              navLinks.forEach((nav) => nav.classList.remove("active"));
+              if (link) link.classList.add("active");
+            }
+          });
+        },
+        {
+          threshold: 0.6,
+        }
+      );
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+    </script>
+  </body>
+</html>
