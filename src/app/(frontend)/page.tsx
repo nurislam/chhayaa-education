@@ -35,7 +35,7 @@ export default function HomePage() {
       {/* Welcome Section */}
       <Container sx={{ my: 5, textAlign: "center" }}>
         <Typography variant="h3" fontWeight="bold">
-          Welcome to DROP CMS!
+          Welcome to Custom CMS!
         </Typography>
         <Typography variant="body1" sx={{ mt: 2 }}>
           We are dedicated to providing you with the best service. Explore our

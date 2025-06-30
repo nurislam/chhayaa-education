@@ -7,10 +7,9 @@ import { ROUTES } from "@utils/routes";
 import { createTheme } from "@mui/material/styles";
 import { AppProvider, type Session, type Router as ToolpadRouter } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
-import { DemoProvider } from "@toolpad/core/internal";
+import { DemoProvider } from "@toolpad/core/internal";        
 import { transformNavigation } from "@/utils/transformNavigation";
-import { useModulesQuery } from "@/data/module/use-module.query";
-import { log } from "console";
+import { useModulesQuery } from "@/data/module/use-module.query";  
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -96,7 +95,7 @@ export default function DashboardOnlyLayout({ children }: DashboardLayoutProps) 
       <AppProvider
         navigation={navigation}
         branding={{
-          logo: <img src="/logo.png" alt="Drop CMS Logo" />,
+          logo: <img src="/logo-new.png" alt="Custom CMS Logo" />,
           title: "",
           homeUrl: "/admin/dashboard",
         }}
