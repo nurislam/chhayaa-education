@@ -95,15 +95,15 @@ export default function Dashboard() {
         </Grid>
       </Box>
 
-      {/* Product Group */}
+      {/* Course Group */}
       <Box mb={3}>
         <Typography variant="h5" sx={{ mb: 2, mt: 8, fontWeight: "bold" }}>
-          🛍️ Products details
+          🛍️ Courses details
         </Typography>
         <Grid container spacing={2}>
           {[
             {
-              label: "Total Products",
+              label: "Total Course",
               value: data?.products,
               icon: <ShoppingCartIcon />,
               bgColor: "#FF9800",

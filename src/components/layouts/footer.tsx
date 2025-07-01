@@ -20,7 +20,7 @@ const Footer = () => {
           {/* Site Logo & Menu */}
           <Grid size={{ xs: 12, md: 4 }}>
             <Typography variant="h6" fontWeight="bold">
-             Drop CMS
+             Custom CMS
             </Typography> 
               <List sx={{ listStyle: "none", padding: 0, mt: 2 }}>
                 <ListItem><Link href={`/about/`}>About Us</Link></ListItem>
