@@ -22,3 +22,15 @@ export type PagesType = {
   deleted: boolean;
   status: number;
 };
+
+export type CoursesType = {
+  id: number;
+  title: string;
+  imageUrl: string;
+  price: string;
+  rating: string;
+  totalLesson: number;
+  TotalStudents: number;
+  language: string;
+  duration: string;
+};

@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
   PRODUCTS: API_ENDPOINT + "products",
   POSTS: API_ENDPOINT + "posts",
   TAGS: API_ENDPOINT + "tags",
+  COURSES: API_ENDPOINT + "courses",
 };
 
 export const LOCAL_ENDPOINTS = {
@@ -47,4 +48,5 @@ export const LOCAL_ENDPOINTS = {
   PRODUCTS: LOCAL_ENDPOINT + "products",
   POSTS: LOCAL_ENDPOINT + "posts",
   TAGS: LOCAL_ENDPOINT + "tags",
+  COURSES: LOCAL_ENDPOINT + "courses",
 };
