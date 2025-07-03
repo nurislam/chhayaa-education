@@ -28,10 +28,11 @@ import { toast } from "react-toastify";
 import { BiEditAlt, BiPlusMedical } from "react-icons/bi";
 import Link from "next/link";
 import {
-  useDeletePost,
-  usePostsQuery,
-  useUpdatePostById,
-} from "@data/posts/use-posts.query";
+  useDeleteCours,
+
+  useCoursesQuery,
+  useUpdateCoursesById,
+} from "@data/courses/use-courses.query";
 
 import SortTable from "@components/ui/sort-table";
 import { dynamicSort } from "@utils/dynamic-sort";
@@ -43,8 +44,7 @@ import {
   FaAngleRight,
 } from "react-icons/fa";
 import defaultMedia from "@public/default-media.png";
-import Image from "next/image";
-import { useCoursesQuery } from "@/data/courses/use-courses.query";
+import Image from "next/image"; 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -76,9 +76,9 @@ export default function BlogPage() {
   const [openBulkStatusAlert, setOpenBulkStatusAlert] = useState(false); // State for bulk status confirmation
   const [openBulkDeleteAlert, setOpenBulkDeleteAlert] = useState(false);
 
-  // Fetch posts
+  // Fetch courses
   const {
-    data: post = [],
+    data: posts = [],
     isPending,
     refetch: refetchPosts,
   } = useCoursesQuery({
@@ -88,33 +88,31 @@ export default function BlogPage() {
         relation: "category",
         scope: { fields: { id: true, categoryName: true } },
       },
-      {
-        relation: "tags",
-        scope: {
-          fields: { id: true, postId: true, identifier: true, name: true },
-        },
-      },
+       
     ],
     order: ["id DESC"],
   });
 
   // Fetch categories
   const { data: categories = [] } = useCategoryQuery({
-    where: { deleted: 0 },
+    where: { categoryType:'course', deleted: 0 },
     order: ["createdAt DESC"],
   });
 
   // Delete Post Mutation
-  const { mutate: deletePost } = useDeletePost();
-  const { mutate: updatePageStatus } = useUpdatePostById();
+  const { mutate: deletePost } = useDeleteCours();
+  const { mutate: updatePageStatus } = useUpdateCoursesById();
 
-  // Filter posts based on title, status, and category
-  const filteredPost = post.filter((post: any) => {
+  console.log(posts);
+  
+
+  // Filter courses based on title, status, and category
+  const filteredPost = posts.filter((post: any) => {
     const isStatusMatch = postStatusFilter
-      ? post.postStatus === postStatusFilter
+      ? post.status === postStatusFilter
       : true;
     const isCategoryMatch = categoryIdFilter
-      ? post.category.id === parseInt(categoryIdFilter)
+      ? post.categoryId === parseInt(categoryIdFilter)
       : true;
 
     return (
@@ -184,7 +182,7 @@ export default function BlogPage() {
 
     selectedPosts.forEach((postId) => {
       updatePageStatus(
-        { id: postId, postStatus: status },
+        { id: postId, status },
         {
           onSuccess: () => {
             toast.success(`Posts have been updated to ${status}`);
@@ -248,13 +246,13 @@ export default function BlogPage() {
         </Box>
 
         <Box>
-          <Link href="/admin/posts/create" passHref>
+          <Link href="/admin/courses/create" passHref>
             <Button
               variant="contained"
               color="primary"
               startIcon={<BiPlusMedical size={14} />}
             >
-              Create New Post
+              Create New Course
             </Button>
           </Link>
         </Box>
@@ -271,7 +269,7 @@ export default function BlogPage() {
                   onChange={(e) => {
                     const isChecked = e.target.checked;
                     setSelectedPosts(
-                      isChecked ? post.map((p: any) => p.id) : []
+                      isChecked ? posts.map((p: any) => p.id) : []
                     );
                   }}
                 />
@@ -318,7 +316,7 @@ export default function BlogPage() {
               <SortTable
                   order={sortOrder}
                   setOrder={setSortOrder}
-                  fieldName="postStatus"
+                  fieldName="status"
                   justifyContent="center"
                 >
                   <strong>Status</strong>
@@ -358,7 +356,7 @@ export default function BlogPage() {
                     {isPending ? (
                       <span>Loading...</span>
                     ) : (
-                      <span>No posts found</span>
+                      <span>No courses found</span>
                     )}
                   </Typography>
                 </StyledTableCell>
@@ -447,7 +445,7 @@ export default function BlogPage() {
                     <StyledTableCell
                       sx={{ textAlign: "center", textTransform: "capitalize" }}
                     >
-                      {post.postStatus === "published" ? (
+                      {post.status === "published" ? (
                         <span
                           style={{
                             background: "#d4edda",
@@ -456,9 +454,9 @@ export default function BlogPage() {
                             borderRadius: "5px",
                           }}
                         >
-                          {post.postStatus}
+                          {post.status}
                         </span>
-                      ) : post.postStatus === "draft" ? (
+                      ) : post.status === "draft" ? (
                         <span
                           style={{
                             background: "#fff3cd",
@@ -467,7 +465,7 @@ export default function BlogPage() {
                             borderRadius: "5px",
                           }}
                         >
-                          {post.postStatus}
+                          {post.status}
                         </span>
                       ) : (
                         <span
@@ -478,7 +476,7 @@ export default function BlogPage() {
                             borderRadius: "5px",
                           }}
                         >
-                          {post.postStatus}
+                          {post.status}
                         </span>
                       )}
                     </StyledTableCell>
@@ -490,7 +488,7 @@ export default function BlogPage() {
                     </StyledTableCell>
                     <StyledTableCell align="center">
                       <Link
-                        href={`/admin/posts/edit/${post.identifier}`}
+                        href={`/admin/courses/edit/${post.identifier}`}
                         passHref
                       >
                         <IconButton

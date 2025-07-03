@@ -7,6 +7,11 @@ export type IPostVariables = {
   content: string;
   identifier: string;
   categoryId: number;
+  TotalStudents: number;
+  totalLesson: number;
+  imageUrl: string;
+  status: string;
+  featured: string;
   createdBy: string;
   deleted?: number;
   createdAt?: string;
