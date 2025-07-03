@@ -306,9 +306,7 @@ export default function BlogPage() {
                 <strong>Category</strong>
                 </SortTable>
               </StyledTableCell>
-              <StyledTableCell width={"200px"}>
-                <strong>Tags</strong>
-              </StyledTableCell>
+              
               <StyledTableCell>
                 <strong>Content</strong>
               </StyledTableCell>
@@ -418,24 +416,7 @@ export default function BlogPage() {
                     <StyledTableCell>
                       {post.category.categoryName}
                     </StyledTableCell>
-                    <StyledTableCell>
-                      <Typography variant="body2" color="rgba(0, 0, 0, 0.6)">
-                        {post.tags?.length > 0
-                          ? post.tags.map((tag: any, index: number) => (
-                              <span key={tag.name}>
-                                {index > 0 && ", "}
-                                <Link
-                                  href={`/tag/${tag.identifier}`}
-                                  target="_blank"
-                                  passHref
-                                >
-                                  {tag.name}
-                                </Link>
-                              </span>
-                            ))
-                          : null}
-                      </Typography>
-                    </StyledTableCell>
+                 
                     <StyledTableCell>
                       {post.content.length > 30
                         ? post.content.slice(0, 30) + "..."

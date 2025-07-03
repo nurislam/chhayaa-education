@@ -15,10 +15,7 @@ import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { useCategoryQuery } from "@data/category/use-category.query";
 import { useRouter } from "next/navigation";
-import {
-  useCreatePostsMutation,
-  useTagsQuery,
-} from "@data/posts/use-posts.query";
+import { useCreateCoursesMutation } from "@data/courses/use-courses.query";
 import { Autocomplete, Chip } from "@mui/material";
 import { toast } from "react-toastify";
 import { getAuthCredentials } from "@/utils/auth-utils";
@@ -37,21 +34,13 @@ export default function PostCreateForm() {
   const [featured, setFeatured] = useState<File | null>(null);
   const [tagNames, setTagIds] = useState<string[]>([]);
 
-  const { mutate: createPost } = useCreatePostsMutation();
+  const { mutate: createPost } = useCreateCoursesMutation();
   const credentials = getAuthCredentials();
 
   const { data: categories = [] } = useCategoryQuery({
-    where: { deleted: false },
+    where: { categoryType: "course", deleted: false },
     order: ["categoryName ASC"],
   });
-
-  const { data: tags = [] } = useTagsQuery({
-    order: ["name ASC"],
-  });
-  // Ensure uniqueness by filtering duplicate tags based on their name
-  const uniqueTags = Array.from(new Set(tags.map((tag: any) => tag.name)))
-    .map((name) => tags.find((tag: any) => tag.name === name))
-    .filter(Boolean);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
@@ -74,16 +63,18 @@ export default function PostCreateForm() {
       identifier,
       title,
       content,
-      featured: featured?.name,
-      tagNames,
+      TotalStudents: 0,
+      totalLesson: 0,
+      featured: "",
+      imageUrl: "",
       createdBy: credentials?.id || "", // Ensure createdBy is always a string
-      postStatus: "pending",
+      status: "active",
     };
 
     createPost(postData, {
       onSuccess: () => {
         toast.success("Post created successfully!");
-        router.push("/admin/posts");
+        router.push("/admin/courses");
       },
       onError: (error: any) => {
         toast.error(
@@ -96,7 +87,7 @@ export default function PostCreateForm() {
   return (
     <Box component="form" onSubmit={handleSubmit} p={3}>
       <Typography variant="h5" mb={2}>
-        Create Post
+        Add New Courses
       </Typography>
 
       <Grid container spacing={2}>
@@ -156,97 +147,6 @@ export default function PostCreateForm() {
               ))}
             </Select>
           </FormControl>
-
-          {/* <FormControl fullWidth sx={{ mb: 2 }}>
-            <InputLabel id="tag-select-label">Tags</InputLabel>
-            <Select
-              labelId="tag-select-label"
-              multiple
-              value={tagIds}
-              onChange={(e) =>
-                setTagIds(
-                  typeof e.target.value === "string"
-                    ? e.target.value.split(",")
-                    : e.target.value.map(String)
-                )
-              }
-              input={<OutlinedInput label="Tags" />}
-              renderValue={(selected) => (
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {selected.map((id) => {
-                    const tag = tags.find((t: any) => String(t.id) === id);
-                    return (
-                      <Chip
-                        key={id}
-                        label={tag?.name}
-                        onMouseDown={(e) => e.stopPropagation()} // 👈 prevents dropdown toggle
-                        onDelete={(e) => {
-                          e.stopPropagation(); // 👈 prevents dropdown toggle
-                          setTagIds((prev) =>
-                            prev.filter((tagId) => tagId !== id)
-                          );
-                        }}
-                      />
-                    );
-                  })}
-                </Box>
-              )}
-              MenuProps={{
-                PaperProps: {
-                  style: {
-                    maxHeight: 300,
-                  },
-                },
-              }}
-            >
-              {tags.map((tag: any) => (
-                <MenuItem key={tag.id} value={String(tag.id)}>
-                  {tag.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> */}
-          <Autocomplete
-            multiple
-            freeSolo
-            options={uniqueTags.map((tag: any) => tag.name)} // Use unique tag names
-            value={tagNames.map((name) => {
-              const tag = uniqueTags.find((t: any) => t.name === name);
-              return tag?.name || name;
-            })}
-            onChange={(e, newValue) => {
-              // Convert names to tag IDs or keep new tag names
-              const selected = newValue.map((val: string) => {
-                const found = uniqueTags.find((t: any) => t.name === val);
-                return found ? found.name : val;
-              });
-              setTagIds(selected as string[]);
-            }}
-            renderTags={(value: string[], getTagProps) =>
-              value.map((option, index) => {
-                const tagProps = getTagProps({ index });
-                return (
-                  <React.Fragment key={`${option}-${index}`}>
-                    <Chip
-                      {...tagProps}
-                      variant="outlined"
-                      label={option}
-                      onMouseDown={(e) => e.stopPropagation()}
-                    />
-                  </React.Fragment>
-                );
-              })
-            }
-            
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Tags"
-                placeholder="Enter or select tags"
-              />
-            )}
-          />
         </Grid>
       </Grid>
 
