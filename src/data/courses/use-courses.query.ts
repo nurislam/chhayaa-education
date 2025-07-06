@@ -1,4 +1,4 @@
-import Courses from "@repositories/courses"; 
+import Courses from "@repositories/courses";
 import { API_ENDPOINTS, LOCAL_ENDPOINTS } from "@utils/api/endpoints";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -9,24 +9,32 @@ export type IPostVariables = {
   categoryId: number;
   TotalStudents: number;
   totalLesson: number;
-  imageUrl: string;
+  imageUrl?: string;
   status: string;
   featured: string;
-  createdBy: string;
+  createdBy?: string;
   deleted?: number;
   createdAt?: string;
   updatedAt?: string;
+  instructorId: number;
+  price: number;
+  duration: string;
+  language: string;
+  certificate: string;
+  rating: number;
 };
 
 const fetchCoursesData = async (options: any, localContext?: any) => {
-  const endpoint = localContext ? LOCAL_ENDPOINTS.COURSES : API_ENDPOINTS.COURSES;
-  const { data } = await Courses.find(`${endpoint}?filter=${JSON.stringify(options)}`, localContext);
+  const endpoint = localContext
+    ? LOCAL_ENDPOINTS.COURSES
+    : API_ENDPOINTS.COURSES;
+  const { data } = await Courses.find(
+    `${endpoint}?filter=${JSON.stringify(options)}`,
+    localContext
+  );
   return data;
 };
 
- 
-
- 
 const useCoursesQuery = (options: any, localContext?: any) => {
   return useQuery({
     queryKey: ["Courses"],
@@ -48,7 +56,10 @@ const useCreateCoursesMutation = () => {
 const useUpdateCoursesMutation = () => {
   return useMutation({
     mutationFn: (params: any) => {
-      return Courses.patchUpdate(`${API_ENDPOINTS.COURSES}/${params.id}`, params);
+      return Courses.patchUpdate(
+        `${API_ENDPOINTS.COURSES}/${params.id}`,
+        params
+      );
     },
   });
 };
@@ -56,21 +67,27 @@ const useUpdateCoursesById = () => {
   return useMutation({
     mutationFn: (params: any) => {
       const variables = {
-        id: params.id, 
+        id: params.id,
         postStatus: params.postStatus,
         updatedAt: new Date().toISOString(),
-      }; 
-      
-      return Courses.patchUpdate(`${API_ENDPOINTS.COURSES}/${params.id}`, variables);
+      };
+
+      return Courses.patchUpdate(
+        `${API_ENDPOINTS.COURSES}/${params.id}`,
+        variables
+      );
     },
   });
 };
 
- 
-
 const fetchCoursesDetails = async (identifier: any, localContext?: any) => {
-  const endpoint = localContext ? LOCAL_ENDPOINTS.COURSES : API_ENDPOINTS.COURSES;
-  const { data } = await Courses.find(`${endpoint}/details/${identifier}`, localContext);
+  const endpoint = localContext
+    ? LOCAL_ENDPOINTS.COURSES
+    : API_ENDPOINTS.COURSES;
+  const { data } = await Courses.find(
+    `${endpoint}/details/${identifier}`,
+    localContext
+  );
   return data;
 };
 
@@ -83,7 +100,9 @@ const useDetailsCoursesInfo = (identifier: string, localContext?: any) => {
 };
 
 const useDeleteCours = (localContext?: any) => {
-  const endpoint = localContext ? LOCAL_ENDPOINTS.COURSES : API_ENDPOINTS.COURSES;
+  const endpoint = localContext
+    ? LOCAL_ENDPOINTS.COURSES
+    : API_ENDPOINTS.COURSES;
 
   return useMutation({
     mutationFn: (id: number) => {
@@ -93,58 +112,78 @@ const useDeleteCours = (localContext?: any) => {
 };
 
 const fetchCategoryCours = async (identifier: any, localContext?: any) => {
-  const endpoint = localContext ? LOCAL_ENDPOINTS.COURSES : API_ENDPOINTS.COURSES;
-  const { data } = await Courses.find(`${endpoint}/category/${identifier}`, localContext);
+  const endpoint = localContext
+    ? LOCAL_ENDPOINTS.COURSES
+    : API_ENDPOINTS.COURSES;
+  const { data } = await Courses.find(
+    `${endpoint}/category/${identifier}`,
+    localContext
+  );
   return data;
 };
 
 const fetchTagCourses = async (identifier: any, localContext?: any) => {
-  const endpoint = localContext ? LOCAL_ENDPOINTS.COURSES : API_ENDPOINTS.COURSES;
-  const { data } = await Courses.find(`${endpoint}/tag/${identifier}`, localContext);
-  return data;
-};
- 
-const fetchCategoryCourses = async (identifier: any, localContext?: any) => {
-  const endpoint = localContext ? LOCAL_ENDPOINTS.COURSES : API_ENDPOINTS.COURSES;
-  const { data } = await Courses.find(`${endpoint}/category/${identifier}`, localContext);
+  const endpoint = localContext
+    ? LOCAL_ENDPOINTS.COURSES
+    : API_ENDPOINTS.COURSES;
+  const { data } = await Courses.find(
+    `${endpoint}/tag/${identifier}`,
+    localContext
+  );
   return data;
 };
 
-const fetchRelatedCourses = async(
+const fetchCategoryCourses = async (identifier: any, localContext?: any) => {
+  const endpoint = localContext
+    ? LOCAL_ENDPOINTS.COURSES
+    : API_ENDPOINTS.COURSES;
+  const { data } = await Courses.find(
+    `${endpoint}/category/${identifier}`,
+    localContext
+  );
+  return data;
+};
+
+const fetchRelatedCourses = async (
   categoryId: string,
   currentPostId: string,
   ctx: any
-) =>{
+) => {
   //Courses.find(`${endpoint}?filter=${JSON.stringify(options)}`, localContext);
   const endpoint = ctx ? LOCAL_ENDPOINTS.COURSES : API_ENDPOINTS.COURSES;
-  const response = await Courses.find(`${endpoint}?filter=${encodeURIComponent(JSON.stringify({
-    where: {
-      categoryId,
-      id: { neq: currentPostId },
-      deleted: false,
-      postStatus: "published",
-    },
-    order: ["createdAt DESC"],
-    limit: 6,
-    
-    include: [
-      {
-        relation: 'category',
-        scope: {
-          fields: {id: true, identifier: true, categoryName: true},
+  const response = await Courses.find(
+    `${endpoint}?filter=${encodeURIComponent(
+      JSON.stringify({
+        where: {
+          categoryId,
+          id: { neq: currentPostId },
+          deleted: false,
+          postStatus: "published",
         },
-      },
-      {
-        relation: 'tags',
-        scope: {
-          fields: {id: true, identifier: true, postId: true, name: true},
-        },
-      },
-    ],
-  }))}`, ctx);
+        order: ["createdAt DESC"],
+        limit: 6,
+
+        include: [
+          {
+            relation: "category",
+            scope: {
+              fields: { id: true, identifier: true, categoryName: true },
+            },
+          },
+          {
+            relation: "tags",
+            scope: {
+              fields: { id: true, identifier: true, postId: true, name: true },
+            },
+          },
+        ],
+      })
+    )}`,
+    ctx
+  );
 
   return response.data;
-}
+};
 
 export {
   fetchCoursesData,
@@ -153,8 +192,8 @@ export {
   useUpdateCoursesMutation,
   useUpdateCoursesById,
   useDetailsCoursesInfo,
-  useDeleteCours, 
+  useDeleteCours,
   fetchCoursesDetails,
-  fetchCategoryCourses, 
-  fetchRelatedCourses, 
+  fetchCategoryCourses,
+  fetchRelatedCourses,
 };

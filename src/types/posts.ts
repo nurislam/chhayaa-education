@@ -27,8 +27,8 @@ export type CoursesType = {
   id: number;
   title: string;
   imageUrl: string;
-  price: string;
-  rating: string;
+  price: number;
+  rating: number;
   totalLesson: number;
   TotalStudents: number;
   language: string;
