@@ -30,6 +30,7 @@ type FormValues = {
   totalLesson: number;
   status: string;
   featured?: File | null;
+  imageUrl?: string;
   instructorId: string;
   price: number;
   duration: string;
@@ -89,6 +90,7 @@ export default function PostCreateForm() {
       categoryId: "",
       TotalStudents: 0,
       totalLesson: 0,
+      imageUrl: "",
       status: "",
       featured: null,
       instructorId: "1",
@@ -120,7 +122,7 @@ export default function PostCreateForm() {
       TotalStudents: data.TotalStudents,
       totalLesson: data.totalLesson,
       featured: "", // handle file upload separately if needed
-      imageUrl: "",
+      imageUrl: data.imageUrl,
       createdBy: credentials?.id || "",
       status: data.status,
       instructorId: Number(data.instructorId),
@@ -185,7 +187,7 @@ export default function PostCreateForm() {
               helperText={errors.content?.message}
             />
           </Box>
-          <Box mb={2}>
+          {/* <Box mb={2}>
             <Typography variant="body1" gutterBottom>
               Featured Image
             </Typography>
@@ -202,7 +204,7 @@ export default function PostCreateForm() {
                 />
               )}
             />
-          </Box>
+          </Box> */}
           <TextField
             fullWidth
             label="Price"
@@ -245,6 +247,14 @@ export default function PostCreateForm() {
             sx={{ mb: 2 }}
             error={!!errors.rating}
             helperText={errors.rating?.message}
+          />
+          <TextField
+            fullWidth
+            label="Image URL"
+            {...register("imageUrl")}
+            sx={{ mb: 2 }}
+            error={!!errors.imageUrl}
+            helperText={errors.imageUrl?.message}
           />
         </Grid>
         <Grid item xs={12} md={3}>

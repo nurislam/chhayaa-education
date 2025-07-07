@@ -34,3 +34,19 @@ export type CoursesType = {
   language: string;
   duration: string;
 };
+
+export type InstructorType = {
+  id?: number;
+  identifier: string;
+  title?: string;
+  content?: string;
+  rating?: number;
+  totalCourse?: number;
+  featured?: boolean;
+  imageUrl?: string;
+  status?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: string;
+  deleted?: boolean;
+};
