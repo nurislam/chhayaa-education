@@ -8,7 +8,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow, 
+  TableRow,
   TextField,
   IconButton,
   Typography,
@@ -29,7 +29,6 @@ import { BiEditAlt, BiPlusMedical } from "react-icons/bi";
 import Link from "next/link";
 import {
   useDeleteCours,
-
   useCoursesQuery,
   useUpdateCoursesById,
 } from "@data/courses/use-courses.query";
@@ -44,7 +43,7 @@ import {
   FaAngleRight,
 } from "react-icons/fa";
 import defaultMedia from "@public/default-media.png";
-import Image from "next/image"; 
+import Image from "next/image";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -81,21 +80,11 @@ export default function BlogPage() {
     data: posts = [],
     isPending,
     refetch: refetchPosts,
-  } = useCoursesQuery({
-    where: { deleted: false },
-    include: [
-      {
-        relation: "category",
-        scope: { fields: { id: true, categoryName: true } },
-      },
-       
-    ],
-    order: ["id DESC"],
-  });
+  } = useCoursesQuery({});
 
   // Fetch categories
   const { data: categories = [] } = useCategoryQuery({
-    where: { categoryType:'course', deleted: 0 },
+    where: { categoryType: "course", deleted: 0 },
     order: ["createdAt DESC"],
   });
 
@@ -104,7 +93,6 @@ export default function BlogPage() {
   const { mutate: updatePageStatus } = useUpdateCoursesById();
 
   console.log(posts);
-  
 
   // Filter courses based on title, status, and category
   const filteredPost = posts.filter((post: any) => {
@@ -203,46 +191,47 @@ export default function BlogPage() {
       {/* Top Controls: Search (Left) & Buttons (Right) */}
       <Box display="flex" justifyContent="space-between" mb={2}>
         <Box display="flex" gap={2}>
-        <TextField
-          label="Search by Title"
-          variant="outlined"
-          size="small"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        {/* Category Dropdown */}
-        <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
-          <InputLabel>Category</InputLabel>
-          <Select
-            value={categoryIdFilter || ""}
-            onChange={handleCategoryChange}
-            label="Category"
-          >
-            <MenuItem value="">
-              <em>All Categories</em>
-            </MenuItem>
-            {categories.map((category: any) => (
-              <MenuItem key={category.id} value={category.id}>
-                {category.categoryName}
+          <TextField
+            label="Search by Title"
+            variant="outlined"
+            size="small"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          {/* Category Dropdown */}
+          <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
+            <InputLabel>Category</InputLabel>
+            <Select
+              value={categoryIdFilter || ""}
+              onChange={handleCategoryChange}
+              label="Category"
+            >
+              <MenuItem value="">
+                <em>All Categories</em>
               </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
-          <InputLabel>Status</InputLabel>
-          <Select
-            value={postStatusFilter || ""}
-            onChange={filtterCategoryStatus}
-            label="Status"
-          >
-            <MenuItem value="">
-              <em>All Status</em>
-            </MenuItem> 
-              <MenuItem value="pending"> Pending</MenuItem> 
-              <MenuItem value="draft"> Draft </MenuItem> 
-              <MenuItem value="published"> Published</MenuItem> 
-          </Select>
-        </FormControl>
+              {categories.map((category: any) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.categoryName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
+            <InputLabel>Status</InputLabel>
+            <Select
+              value={postStatusFilter || ""}
+              onChange={filtterCategoryStatus}
+              label="Status"
+            >
+              <MenuItem value="">
+                <em>All Status</em>
+              </MenuItem>
+              <MenuItem value="pending"> Pending</MenuItem>
+              <MenuItem value="draft"> Draft </MenuItem>
+              <MenuItem value="published"> Published</MenuItem>
+              <MenuItem value="deleted"> Deleted</MenuItem>
+            </Select>
+          </FormControl>
         </Box>
 
         <Box>
@@ -277,48 +266,48 @@ export default function BlogPage() {
               <StyledTableCell align="center">Image</StyledTableCell>
 
               <StyledTableCell>
-              <SortTable
+                <SortTable
                   order={sortOrder}
                   setOrder={setSortOrder}
                   fieldName="title"
                   justifyContent="center"
                 >
                   <strong>Title</strong>
-                </SortTable> 
+                </SortTable>
               </StyledTableCell>
               <StyledTableCell>
-              <SortTable
+                <SortTable
                   order={sortOrder}
                   setOrder={setSortOrder}
                   fieldName="identifier"
                   justifyContent="center"
                 >
                   <strong>Identifier</strong>
-                </SortTable>  
+                </SortTable>
               </StyledTableCell>
               <StyledTableCell>
-              <SortTable
+                <SortTable
                   order={sortOrder}
                   setOrder={setSortOrder}
                   fieldName="categoryId"
                   justifyContent="center"
-                >   
-                <strong>Category</strong>
+                >
+                  <strong>Category</strong>
                 </SortTable>
               </StyledTableCell>
-              
+
               <StyledTableCell>
                 <strong>Content</strong>
               </StyledTableCell>
               <StyledTableCell align="center">
-              <SortTable
+                <SortTable
                   order={sortOrder}
                   setOrder={setSortOrder}
                   fieldName="status"
                   justifyContent="center"
                 >
                   <strong>Status</strong>
-                </SortTable>  
+                </SortTable>
               </StyledTableCell>
               <StyledTableCell>
                 <SortTable
@@ -373,7 +362,7 @@ export default function BlogPage() {
                     </StyledTableCell>
                     <StyledTableCell align="center">
                       {post.imageUrl ? (
-                        <Image
+                        <img
                           src={post.imageUrl}
                           alt={post.title}
                           width={40}
@@ -381,7 +370,7 @@ export default function BlogPage() {
                           style={{ objectFit: "cover", borderRadius: 4 }}
                         />
                       ) : post.featured ? (
-                        <Image
+                        <img
                           src={post.featured}
                           alt={post.title}
                           width={40}
@@ -389,8 +378,8 @@ export default function BlogPage() {
                           style={{ objectFit: "cover", borderRadius: 4 }}
                         />
                       ) : (
-                        <Image
-                          src={defaultMedia}
+                        <img
+                          src={"/default-media.png"}
                           alt="Default"
                           width={40}
                           height={40}
@@ -411,18 +400,16 @@ export default function BlogPage() {
                         style={{ fontSize: "14px" }}
                       >
                         /{post.identifier}
-                      </Link>{" "}
+                      </Link>
                     </StyledTableCell>
                     <StyledTableCell>
-                      {post.category.categoryName}
+                      {post.category?.categoryName || "-"}
                     </StyledTableCell>
-                 
                     <StyledTableCell>
-                      {post.content.length > 30
+                      {post.content && post.content.length > 30
                         ? post.content.slice(0, 30) + "..."
                         : post.content}
                     </StyledTableCell>
-
                     <StyledTableCell
                       sx={{ textAlign: "center", textTransform: "capitalize" }}
                     >
@@ -462,32 +449,30 @@ export default function BlogPage() {
                       )}
                     </StyledTableCell>
                     <StyledTableCell sx={{ textAlign: "center" }}>
-                      {new Date(post.createdAt).toLocaleDateString()}
+                      {post.createdAt
+                        ? new Date(post.createdAt).toLocaleDateString()
+                        : "-"}
                     </StyledTableCell>
                     <StyledTableCell sx={{ textAlign: "center" }}>
-                      {new Date(post.updatedAt).toLocaleDateString()}
+                      {post.updatedAt
+                        ? new Date(post.updatedAt).toLocaleDateString()
+                        : "-"}
                     </StyledTableCell>
                     <StyledTableCell align="center">
                       <Link
                         href={`/admin/courses/edit/${post.identifier}`}
                         passHref
                       >
-                        <IconButton
-                          sx={{
-                            borderRadius: "5px",
-                            background: "#edefec",
-                            width: "32px",
-                            height: "32px",
-                          }}
-                        >
-                          <BiEditAlt size={15} color="#696969" />
+                        <IconButton color="primary" size="small">
+                          <BiEditAlt />
                         </IconButton>
                       </Link>
                       <IconButton
                         color="error"
+                        size="small"
                         onClick={() => handleDelete(post.id)}
                       >
-                        <DeleteIcon fontSize="small" />
+                        <DeleteIcon />
                       </IconButton>
                     </StyledTableCell>
                   </StyledTableRow>
