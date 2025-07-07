@@ -92,8 +92,6 @@ export default function BlogPage() {
   const { mutate: deletePost } = useDeleteCours();
   const { mutate: updatePageStatus } = useUpdateCoursesById();
 
-  console.log(posts);
-
   // Filter courses based on title, status, and category
   const filteredPost = posts.filter((post: any) => {
     const isStatusMatch = postStatusFilter

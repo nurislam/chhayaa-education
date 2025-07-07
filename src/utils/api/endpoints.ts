@@ -1,4 +1,3 @@
- 
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 const LOCAL_ENDPOINT = process.env.NEXT_INTERNAL_API_ENDPOINT;
 
@@ -25,6 +24,7 @@ export const API_ENDPOINTS = {
   POSTS: API_ENDPOINT + "posts",
   TAGS: API_ENDPOINT + "tags",
   COURSES: API_ENDPOINT + "courses",
+  INSTRUCTORS: API_ENDPOINT + "instructors",
 };
 
 export const LOCAL_ENDPOINTS = {
@@ -49,4 +49,5 @@ export const LOCAL_ENDPOINTS = {
   POSTS: LOCAL_ENDPOINT + "posts",
   TAGS: LOCAL_ENDPOINT + "tags",
   COURSES: LOCAL_ENDPOINT + "courses",
+  INSTRUCTORS: LOCAL_ENDPOINT + "instructors",
 };
