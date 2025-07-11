@@ -114,30 +114,14 @@ export default function Dashboard() {
               icon: <CategoryIcon />,
               bgColor: "#4CAF50",
             },
-            {
-              label: "Total Orders",
-              value: data?.orders,
-              icon: <ShoppingCartIcon />,
-              bgColor: "#3F51B5",
-            },
+             
             {
               label: "Total Reviews",
               value: data?.reviews,
               icon: <ReviewsIcon />,
               bgColor: "#673AB7",
             },
-            {
-              label: "Total Sales (Yearly)",
-              value: data?.sales,
-              icon: <MonetizationOnIcon />,
-              bgColor: "#9E9E9E",
-            },
-            {
-              label: "Total Returns",
-              value: data?.returns,
-              icon: <ShoppingCartIcon />,
-              bgColor: "#4CAF50",
-            },
+             
           ].map((stat, index) => (
             <StatCard key={index} {...stat} />
           ))}

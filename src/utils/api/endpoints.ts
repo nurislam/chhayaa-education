@@ -26,6 +26,7 @@ export const API_ENDPOINTS = {
   COURSES: API_ENDPOINT + "courses",
   LESSONS: API_ENDPOINT + "lessons",
   INSTRUCTORS: API_ENDPOINT + "instructors",
+  STUDENTS: API_ENDPOINT + "students",
 };
 
 export const LOCAL_ENDPOINTS = {
@@ -52,4 +53,5 @@ export const LOCAL_ENDPOINTS = {
   COURSES: LOCAL_ENDPOINT + "courses",
   LESSONS: LOCAL_ENDPOINT + "lessons",
   INSTRUCTORS: LOCAL_ENDPOINT + "instructors",
+  STUDENTS: API_ENDPOINT + "students",
 };

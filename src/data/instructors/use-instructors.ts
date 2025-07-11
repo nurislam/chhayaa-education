@@ -3,7 +3,7 @@ import { API_ENDPOINTS, LOCAL_ENDPOINTS } from "@utils/api/endpoints";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Instructors from "@/repositories/instructors";
 
-export type IPostVariables = {
+export type IinistructorVariables = {
   id?: number;
   identifier: string;
   title?: string;
@@ -42,7 +42,7 @@ const useInstructorsQuery = (options: any, localContext?: any) => {
 
 const useCreateInstructorsMutation = () => {
   return useMutation({
-    mutationFn: (variables: IPostVariables) => {
+    mutationFn: (variables: IinistructorVariables) => {
       return Instructors.create(API_ENDPOINTS.INSTRUCTORS, variables);
     },
   });

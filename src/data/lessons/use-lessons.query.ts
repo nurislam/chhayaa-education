@@ -3,15 +3,12 @@ import { API_ENDPOINTS, LOCAL_ENDPOINTS } from "@utils/api/endpoints";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { create } from "domain";
 
-export type IPostVariables = {
-   id: number;
+export type ILessonVariables = { 
   name: string;
   identifier: string;
   details: number;
-  createdBy: string;
-  updatedAt: Date;
-  createdAt: Date;
-  deleted: boolean;
+  createdBy: string; 
+  createdAt: Date; 
   status: number;
 };
 
@@ -38,7 +35,7 @@ const useLessonsQuery = (options: any, localContext?: any) => {
 
 const useCreateLessonMutation = () => {
   return useMutation({
-    mutationFn: (variables: IPostVariables) => {
+    mutationFn: (variables: ILessonVariables) => {
       return Lesson.create(API_ENDPOINTS.LESSONS, variables);
     },
   });

@@ -34,6 +34,20 @@ export type CoursesType = {
   language: string;
   duration: string;
 };
+export type StudentType = {
+  id: number;
+  title: string;
+  identifier: string;
+  content: string;
+  imageUrl: string;
+  TotalCourse: number;
+  createdBy: string;
+  updatedAt: Date;
+  createdAt: Date;
+  deleted: boolean;
+  status: string;
+};
+
 export type LessonType = {
   id: number;
   name: string;
@@ -43,7 +57,7 @@ export type LessonType = {
   updatedAt: Date;
   createdAt: Date;
   deleted: boolean;
-  status: number;
+  status: string;
 };
 
 export type InstructorType = {

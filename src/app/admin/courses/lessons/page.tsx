@@ -77,36 +77,37 @@ export default function Lessons() {
 
   // Fetch courses
   const {
-    data: posts = [],
+    data: lessons = [],
     isPending,
     refetch: refetchPosts,
   } = useLessonsQuery({});
 
   // Fetch courses
-  // const { data: courses = [] } = useCoursesQuery({ 
-  //   order: ["createdAt DESC"],
-  // });
+  const {
+        data: courses = [],  
+      } = useCoursesQuery({});
+  
 
   // Delete Post Mutation
   const { mutate: deletePost } = useDeleteLesson();
   const { mutate: updatePageStatus } = useUpdateLessonById();
-
+  
+  
   // Filter courses based on title, status, and category
-  const filteredPost = posts.filter((post: any) => {
+  const filteredPost = lessons.filter((lesson: any) => {
     const isStatusMatch = postStatusFilter
-      ? post.status === postStatusFilter
+      ? lesson.status === postStatusFilter
       : true;
     const isCourseMatch = courseIdFilter
-      ? post.courseId === parseInt(courseIdFilter)
+      ? lesson.courseId === parseInt(courseIdFilter)
       : true;
 
     return (
-      post.title.toLowerCase().includes(search.toLowerCase()) &&
+      lesson.name.toLowerCase().includes(search.toLowerCase()) &&
       isStatusMatch &&
       isCourseMatch
     );
-  });
-
+  }); 
   dynamicSort(filteredPost, sortOrder);
 
   const handleSelectPost = (id: number) => {
@@ -131,6 +132,7 @@ export default function Lessons() {
       deletePost(id, {
         onSuccess: () => {
           toast.success(`The post has been deleted successfully`);
+          refetchPosts();
         },
         onError: () => {
           toast.error(`Not possible to delete this post`);
@@ -197,14 +199,14 @@ export default function Lessons() {
           />
           {/* Category Dropdown */}
           <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
-            <InputLabel>Category</InputLabel>
-            {/* <Select
+            <InputLabel>Courses</InputLabel>
+            <Select
               value={courseIdFilter || ""}
               onChange={handleCourseChange}
               label="Courses"
             >
               <MenuItem value="">
-                <em>All Categories</em>
+                <em>All Courses</em>
               </MenuItem>
               {courses.map((course: any) => (
                 <MenuItem key={course.id} value={course.id}>
@@ -213,7 +215,7 @@ export default function Lessons() {
                   {course.title}
                 </MenuItem>
               ))}
-            </Select> */}
+            </Select>
           </FormControl>
           <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
             <InputLabel>Status</InputLabel>
@@ -225,7 +227,7 @@ export default function Lessons() {
               <MenuItem value="">
                 <em>All Status</em>
               </MenuItem>
-              <MenuItem value="active"> active</MenuItem>
+              <MenuItem value="active"> Active</MenuItem>
               <MenuItem value="inactive"> Inactive </MenuItem>
             </Select>
           </FormControl>
@@ -234,7 +236,7 @@ export default function Lessons() {
         <Box> 
 
           <Link
-            href="/admin/courses/lessons-create"
+            href="/admin/courses/lessons/create"
             passHref
             style={{ marginLeft: "20px" }}
           >
@@ -260,7 +262,7 @@ export default function Lessons() {
                   onChange={(e) => {
                     const isChecked = e.target.checked;
                     setSelectedPosts(
-                      isChecked ? posts.map((p: any) => p.id) : []
+                      isChecked ? lessons.map((p: any) => p.id) : []
                     );
                   }}
                 />
@@ -274,7 +276,7 @@ export default function Lessons() {
                   fieldName="title"
                   justifyContent="center"
                 >
-                  <strong>Title</strong>
+                  <strong>Name</strong>
                 </SortTable>
               </StyledTableCell>
               <StyledTableCell>
@@ -286,17 +288,7 @@ export default function Lessons() {
                 >
                   <strong>Identifier</strong>
                 </SortTable>
-              </StyledTableCell>
-              <StyledTableCell>
-                <SortTable
-                  order={sortOrder}
-                  setOrder={setSortOrder}
-                  fieldName="categoryId"
-                  justifyContent="center"
-                >
-                  <strong>Category</strong>
-                </SortTable>
-              </StyledTableCell>
+              </StyledTableCell> 
 
               <StyledTableCell>
                 <strong>Content</strong>
@@ -321,16 +313,7 @@ export default function Lessons() {
                   <strong>Created</strong>
                 </SortTable>
               </StyledTableCell>
-              <StyledTableCell>
-                <SortTable
-                  order={sortOrder}
-                  setOrder={setSortOrder}
-                  fieldName="updatedAt"
-                  justifyContent="center"
-                >
-                  <strong>Updated</strong>
-                </SortTable>
-              </StyledTableCell>
+              
 
               <StyledTableCell align="center" sx={{ width: "100px" }}>
                 <strong>Action</strong>
@@ -366,16 +349,14 @@ export default function Lessons() {
                       -
                     </StyledTableCell>
                     <StyledTableCell>{post.name}</StyledTableCell>
+                     
                     <StyledTableCell>
-                      -
+                     {post.identifier}
                     </StyledTableCell>
                     <StyledTableCell>
-                     -
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      {post.content && post.content.length > 30
-                        ? post.content.slice(0, 30) + "..."
-                        : post.content}
+                      {post.details && post.details.length > 30
+                        ? post.details.slice(0, 30) + "..."
+                        : post.details}
                     </StyledTableCell>
                     <StyledTableCell
                       sx={{ textAlign: "center", textTransform: "capitalize" }}
@@ -409,9 +390,7 @@ export default function Lessons() {
                         ? new Date(post.createdAt).toLocaleDateString()
                         : "-"}
                     </StyledTableCell>
-                    <StyledTableCell sx={{ textAlign: "center" }}>
-                     -
-                    </StyledTableCell>
+                   
                     <StyledTableCell align="center">
                       <Link
                         href={`/admin/courses/lessons/edit/${post.identifier}`}
@@ -439,26 +418,20 @@ export default function Lessons() {
       {/* Bottom Control with Status Buttons and Pagination */}
       <Box display="flex" justifyContent="space-between" mt={2}>
         <Box display="flex" gap={1}>
+         
           <Button
             variant="outlined"
-            onClick={() => handleStatusChange("pending")}
+            onClick={() => handleStatusChange("active")}
             disabled={selectedPosts.length === 0}
           >
-            Pending
+            Active
           </Button>
           <Button
             variant="outlined"
-            onClick={() => handleStatusChange("published")}
+            onClick={() => handleStatusChange("inactive")}
             disabled={selectedPosts.length === 0}
           >
-            Published
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => handleStatusChange("draft")}
-            disabled={selectedPosts.length === 0}
-          >
-            Draft
+            Inactive
           </Button>
           <Button
             variant="outlined"

@@ -2,7 +2,7 @@ import Courses from "@repositories/courses";
 import { API_ENDPOINTS, LOCAL_ENDPOINTS } from "@utils/api/endpoints";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-export type IPostVariables = {
+export type IcourseVariables = {
   title: string;
   content: string;
   identifier: string;
@@ -47,7 +47,7 @@ const useCoursesQuery = (options: any, localContext?: any) => {
 
 const useCreateCoursesMutation = () => {
   return useMutation({
-    mutationFn: (variables: IPostVariables) => {
+    mutationFn: (variables: IcourseVariables) => {
       return Courses.create(API_ENDPOINTS.COURSES, variables);
     },
   });

@@ -28,10 +28,10 @@ import { toast } from "react-toastify";
 import { BiEditAlt, BiPlusMedical } from "react-icons/bi";
 import Link from "next/link";
 import {
-  useDeleteCours,
-  useCoursesQuery,
-  useUpdateCoursesById,
-} from "@data/courses/use-courses.query";
+  useDeleteStudent,
+  useStudentsQuery,
+  useUpdateStudentsById,
+} from "@data/students/use-students.query";
 
 import SortTable from "@components/ui/sort-table";
 import { dynamicSort } from "@utils/dynamic-sort";
@@ -75,32 +75,12 @@ export default function BlogPage() {
   const [openBulkStatusAlert, setOpenBulkStatusAlert] = useState(false); // State for bulk status confirmation
   const [openBulkDeleteAlert, setOpenBulkDeleteAlert] = useState(false);
 
-  // Fetch courses
+  // Fetch students
   const {
     data: posts = [],
     isPending,
     refetch: refetchPosts,
-  } = useCoursesQuery({
-    include: [
-      {
-        relation: "category",
-        scope: {
-          fields: { id: true, categoryName: true },
-        },
-      },
-      {
-        relation: "lessons",
-        scope: {
-          fields: { id: true, name: true },
-        },
-      },
-      {
-        relation: "instructor",
-        scope: {
-          fields: { id: true, name: true },
-        },
-      },
-    ],
+  } = useStudentsQuery({     
     order: ["createdAt DESC"],
   });
 
@@ -111,10 +91,10 @@ export default function BlogPage() {
   });
 
   // Delete Post Mutation
-  const { mutate: deletePost } = useDeleteCours();
-  const { mutate: updatePageStatus } = useUpdateCoursesById();
+  const { mutate: deletePost } = useDeleteStudent();
+  const { mutate: updatePageStatus } = useUpdateStudentsById();
 
-  // Filter courses based on title, status, and category
+  // Filter students based on title, status, and category
   const filteredPost = posts.filter((post: any) => {
     const isStatusMatch = postStatusFilter
       ? post.status === postStatusFilter
@@ -220,23 +200,7 @@ export default function BlogPage() {
             onChange={(e) => setSearch(e.target.value)}
           />
           {/* Category Dropdown */}
-          <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
-            <InputLabel>Category</InputLabel>
-            <Select
-              value={categoryIdFilter || ""}
-              onChange={handleCategoryChange}
-              label="Category"
-            >
-              <MenuItem value="">
-                <em>All Categories</em>
-              </MenuItem>
-              {categories.map((category: any) => (
-                <MenuItem key={category.id} value={category.id}>
-                  {category.categoryName}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+           
           <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
             <InputLabel>Status</InputLabel>
             <Select
@@ -256,23 +220,13 @@ export default function BlogPage() {
         </Box>
 
         <Box>
-          <Link href="/admin/courses/create" passHref>
+          <Link href="/admin/students/create" passHref>
             <Button
               variant="contained"
               color="primary"
               startIcon={<BiPlusMedical size={14} />}
             >
-              Create New Course
-            </Button>
-          </Link>
-
-          <Link
-            href="/admin/courses/lessons"
-            passHref
-            style={{ marginLeft: "20px" }}
-          >
-            <Button variant="contained" color="primary">
-              Lessons
+              Create New Studente
             </Button>
           </Link>
         </Box>
@@ -374,7 +328,7 @@ export default function BlogPage() {
                     {isPending ? (
                       <span>Loading...</span>
                     ) : (
-                      <span>No courses found</span>
+                      <span>No students found</span>
                     )}
                   </Typography>
                 </StyledTableCell>
@@ -426,7 +380,7 @@ export default function BlogPage() {
                     <StyledTableCell>
                       <Link
                         target="_blank"
-                        href={`/courses/${post.identifier}`}
+                        href={`/students/${post.identifier}`}
                         passHref
                         style={{ fontSize: "14px" }}
                       >
@@ -491,7 +445,7 @@ export default function BlogPage() {
                     </StyledTableCell>
                     <StyledTableCell align="center">
                       <Link
-                        href={`/admin/courses/edit/${post.identifier}`}
+                        href={`/admin/students/edit/${post.identifier}`}
                         passHref
                       >
                         <IconButton color="primary" size="small">
