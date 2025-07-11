@@ -208,6 +208,8 @@ export default function Lessons() {
               </MenuItem>
               {courses.map((course: any) => (
                 <MenuItem key={course.id} value={course.id}>
+
+                <div className="."></div>
                   {course.title}
                 </MenuItem>
               ))}
