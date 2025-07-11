@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
   POSTS: API_ENDPOINT + "posts",
   TAGS: API_ENDPOINT + "tags",
   COURSES: API_ENDPOINT + "courses",
+  LESSONS: API_ENDPOINT + "lessons",
   INSTRUCTORS: API_ENDPOINT + "instructors",
 };
 
@@ -49,5 +50,6 @@ export const LOCAL_ENDPOINTS = {
   POSTS: LOCAL_ENDPOINT + "posts",
   TAGS: LOCAL_ENDPOINT + "tags",
   COURSES: LOCAL_ENDPOINT + "courses",
+  LESSONS: LOCAL_ENDPOINT + "lessons",
   INSTRUCTORS: LOCAL_ENDPOINT + "instructors",
 };

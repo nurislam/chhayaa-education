@@ -28,14 +28,14 @@ import { toast } from "react-toastify";
 import { BiEditAlt, BiPlusMedical } from "react-icons/bi";
 import Link from "next/link";
 import {
-  useDeleteCours,
-  useCoursesQuery,
-  useUpdateCoursesById,
-} from "@data/courses/use-courses.query";
+  useDeleteLesson,
+  useLessonsQuery,
+  useUpdateLessonById,
+} from "@data/lessons/use-lessons.query";
 
 import SortTable from "@components/ui/sort-table";
 import { dynamicSort } from "@utils/dynamic-sort";
-import { useCategoryQuery } from "@data/category/use-category.query";
+import { useCoursesQuery } from "@data/courses/use-courses.query"; 
 import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
@@ -64,14 +64,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function BlogPage() {
+export default function Lessons() {
   const [sortOrder, setSortOrder] = useState("createdAt DESC");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(12);
   const [selectedPosts, setSelectedPosts] = useState<number[]>([]);
   const [postStatusFilter, setPostStatusFilter] = useState<string | null>(null);
-  const [categoryIdFilter, setCategoryIdFilter] = useState<string | null>(null);
+  const [courseIdFilter, setCourseIdFilter] = useState<string | null>(null);
   const [openBulkStatusAlert, setOpenBulkStatusAlert] = useState(false); // State for bulk status confirmation
   const [openBulkDeleteAlert, setOpenBulkDeleteAlert] = useState(false);
 
@@ -80,31 +80,30 @@ export default function BlogPage() {
     data: posts = [],
     isPending,
     refetch: refetchPosts,
-  } = useCoursesQuery({});
+  } = useLessonsQuery({});
 
-  // Fetch categories
-  const { data: categories = [] } = useCategoryQuery({
-    where: { categoryType: "course", deleted: 0 },
-    order: ["createdAt DESC"],
-  });
+  // Fetch courses
+  // const { data: courses = [] } = useCoursesQuery({ 
+  //   order: ["createdAt DESC"],
+  // });
 
   // Delete Post Mutation
-  const { mutate: deletePost } = useDeleteCours();
-  const { mutate: updatePageStatus } = useUpdateCoursesById();
+  const { mutate: deletePost } = useDeleteLesson();
+  const { mutate: updatePageStatus } = useUpdateLessonById();
 
   // Filter courses based on title, status, and category
   const filteredPost = posts.filter((post: any) => {
     const isStatusMatch = postStatusFilter
       ? post.status === postStatusFilter
       : true;
-    const isCategoryMatch = categoryIdFilter
-      ? post.categoryId === parseInt(categoryIdFilter)
+    const isCourseMatch = courseIdFilter
+      ? post.courseId === parseInt(courseIdFilter)
       : true;
 
     return (
       post.title.toLowerCase().includes(search.toLowerCase()) &&
       isStatusMatch &&
-      isCategoryMatch
+      isCourseMatch
     );
   });
 
@@ -120,10 +119,10 @@ export default function BlogPage() {
     });
   };
 
-  const handleCategoryChange = (event: any) => {
-    setCategoryIdFilter(event.target.value);
+  const handleCourseChange = (event: any) => {
+    setCourseIdFilter(event.target.value);
   };
-  const filtterCategoryStatus = (event: any) => {
+  const filtterLessonStatus = (event: any) => {
     setPostStatusFilter(event.target.value);
   };
 
@@ -199,56 +198,50 @@ export default function BlogPage() {
           {/* Category Dropdown */}
           <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
             <InputLabel>Category</InputLabel>
-            <Select
-              value={categoryIdFilter || ""}
-              onChange={handleCategoryChange}
-              label="Category"
+            {/* <Select
+              value={courseIdFilter || ""}
+              onChange={handleCourseChange}
+              label="Courses"
             >
               <MenuItem value="">
                 <em>All Categories</em>
               </MenuItem>
-              {categories.map((category: any) => (
-                <MenuItem key={category.id} value={category.id}>
-                  {category.categoryName}
+              {courses.map((course: any) => (
+                <MenuItem key={course.id} value={course.id}>
+                  {course.title}
                 </MenuItem>
               ))}
-            </Select>
+            </Select> */}
           </FormControl>
           <FormControl variant="outlined" size="small" sx={{ minWidth: 200 }}>
             <InputLabel>Status</InputLabel>
             <Select
               value={postStatusFilter || ""}
-              onChange={filtterCategoryStatus}
+              onChange={filtterLessonStatus}
               label="Status"
             >
               <MenuItem value="">
                 <em>All Status</em>
               </MenuItem>
-              <MenuItem value="pending"> Pending</MenuItem>
-              <MenuItem value="draft"> Draft </MenuItem>
-              <MenuItem value="published"> Published</MenuItem>
-              <MenuItem value="deleted"> Deleted</MenuItem>
+              <MenuItem value="active"> active</MenuItem>
+              <MenuItem value="inactive"> Inactive </MenuItem>
             </Select>
           </FormControl>
         </Box>
 
-        <Box>
-          <Link href="/admin/courses/create" passHref>
+        <Box> 
+
+          <Link
+            href="/admin/courses/lessons-create"
+            passHref
+            style={{ marginLeft: "20px" }}
+          >
             <Button
               variant="contained"
               color="primary"
               startIcon={<BiPlusMedical size={14} />}
             >
-              Create New Course
-            </Button>
-          </Link>
-       
-          <Link href="/admin/courses/lessons" passHref style={{marginLeft:"20px"}}>
-            <Button
-              variant="contained"
-              color="primary"              
-            >
-              Lessons
+              Add Lessons
             </Button>
           </Link>
         </Box>
@@ -368,49 +361,14 @@ export default function BlogPage() {
                       />
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {post.imageUrl ? (
-                        <img
-                          src={post.imageUrl}
-                          alt={post.title}
-                          width={40}
-                          height={40}
-                          style={{ objectFit: "cover", borderRadius: 4 }}
-                        />
-                      ) : post.featured ? (
-                        <img
-                          src={post.featured}
-                          alt={post.title}
-                          width={40}
-                          height={40}
-                          style={{ objectFit: "cover", borderRadius: 4 }}
-                        />
-                      ) : (
-                        <img
-                          src={"/default-media.png"}
-                          alt="Default"
-                          width={40}
-                          height={40}
-                          style={{
-                            objectFit: "cover",
-                            borderRadius: 4,
-                            border: "1px solid #d1d6da",
-                          }}
-                        />
-                      )}
+                      -
                     </StyledTableCell>
-                    <StyledTableCell>{post.title}</StyledTableCell>
+                    <StyledTableCell>{post.name}</StyledTableCell>
                     <StyledTableCell>
-                      <Link
-                        target="_blank"
-                        href={`/blog/${post.identifier}`}
-                        passHref
-                        style={{ fontSize: "14px" }}
-                      >
-                        /{post.identifier}
-                      </Link>
+                      -
                     </StyledTableCell>
                     <StyledTableCell>
-                      {post.category?.categoryName || "-"}
+                     -
                     </StyledTableCell>
                     <StyledTableCell>
                       {post.content && post.content.length > 30
@@ -420,22 +378,11 @@ export default function BlogPage() {
                     <StyledTableCell
                       sx={{ textAlign: "center", textTransform: "capitalize" }}
                     >
-                      {post.status === "published" ? (
+                      {post.status === "active" ? (
                         <span
                           style={{
                             background: "#d4edda",
                             color: "#155724",
-                            padding: "5px 10px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          {post.status}
-                        </span>
-                      ) : post.status === "draft" ? (
-                        <span
-                          style={{
-                            background: "#fff3cd",
-                            color: "#856404",
                             padding: "5px 10px",
                             borderRadius: "5px",
                           }}
@@ -461,13 +408,11 @@ export default function BlogPage() {
                         : "-"}
                     </StyledTableCell>
                     <StyledTableCell sx={{ textAlign: "center" }}>
-                      {post.updatedAt
-                        ? new Date(post.updatedAt).toLocaleDateString()
-                        : "-"}
+                     -
                     </StyledTableCell>
                     <StyledTableCell align="center">
                       <Link
-                        href={`/admin/courses/edit/${post.identifier}`}
+                        href={`/admin/courses/lessons/edit/${post.identifier}`}
                         passHref
                       >
                         <IconButton color="primary" size="small">

@@ -34,6 +34,17 @@ export type CoursesType = {
   language: string;
   duration: string;
 };
+export type LessonType = {
+  id: number;
+  name: string;
+  identifier: string;
+  details: number;
+  createdBy: string;
+  updatedAt: Date;
+  createdAt: Date;
+  deleted: boolean;
+  status: number;
+};
 
 export type InstructorType = {
   id?: number;
