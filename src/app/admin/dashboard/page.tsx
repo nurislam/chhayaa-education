@@ -47,8 +47,7 @@ export default function Dashboard() {
           Admin Dashboard
         </Typography>
         <Typography variant="body1">
-          Manage your site efficiently from here. Monitor sales, track
-          inventory, manage customers, and more.
+         Welcome to our Chhayaa Education
         </Typography>
       </Box>
 
