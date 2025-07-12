@@ -40,7 +40,7 @@ export type StudentType = {
   identifier: string;
   content: string;
   imageUrl: string;
-  TotalCourse: number;
+  totalCourse: number;
   createdBy: string;
   updatedAt: Date;
   createdAt: Date;

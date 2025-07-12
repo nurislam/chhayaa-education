@@ -6,11 +6,11 @@ import Instructors from "@/repositories/instructors";
 export type IinistructorVariables = {
   id?: number;
   identifier: string;
-  title?: string;
+  name: string;
+  designation?: string;
   content?: string;
   rating?: number;
-  totalCourse?: number;
-  featured?: boolean;
+  totalCourse?: number; 
   imageUrl?: string;
   status?: string;
   createdAt?: string;

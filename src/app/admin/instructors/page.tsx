@@ -28,10 +28,10 @@ import { toast } from "react-toastify";
 import { BiEditAlt, BiPlusMedical } from "react-icons/bi";
 import Link from "next/link";
 import {
-  useDeleteStudent,
-  useStudentsQuery,
-  useUpdateStudentsById,
-} from "@data/students/use-students.query";
+  useDeleteInstructors,
+  useInstructorsQuery,
+  useUpdateInstructorsById,
+} from "@data/instructors/use-instructors";
 
 import SortTable from "@components/ui/sort-table";
 import { dynamicSort } from "@utils/dynamic-sort";
@@ -75,12 +75,12 @@ export default function BlogPage() {
   const [openBulkStatusAlert, setOpenBulkStatusAlert] = useState(false); // State for bulk status confirmation
   const [openBulkDeleteAlert, setOpenBulkDeleteAlert] = useState(false);
 
-  // Fetch students
+  // Fetch instructors
   const {
     data: posts = [],
     isPending,
     refetch: refetchPosts,
-  } = useStudentsQuery({     
+  } = useInstructorsQuery({     
     order: ["createdAt DESC"],
   });
 
@@ -91,25 +91,19 @@ export default function BlogPage() {
   });
 
   // Delete Post Mutation
-  const { mutate: deletePost } = useDeleteStudent();
-  const { mutate: updatePageStatus } = useUpdateStudentsById();
+  const { mutate: deletePost } = useDeleteInstructors();
+  const { mutate: updatePageStatus } = useUpdateInstructorsById();
 
-  // Filter students based on title, status, and category
+  // Filter Instructors based on title, status, and category
   const filteredPost = posts.filter((post: any) => {
     const isStatusMatch = postStatusFilter
       ? post.status === postStatusFilter
       : true;
-    const isCategoryMatch = categoryIdFilter
-      ? post.categoryId === parseInt(categoryIdFilter)
-      : true;
-
     return (
-      post.title.toLowerCase().includes(search.toLowerCase()) &&
-      isStatusMatch &&
-      isCategoryMatch
+      post.name.toLowerCase().includes(search.toLowerCase()) &&
+      isStatusMatch
     );
-  });
-  console.log(filteredPost);
+  }); 
 
   dynamicSort(filteredPost, sortOrder);
 
@@ -220,13 +214,13 @@ export default function BlogPage() {
         </Box>
 
         <Box>
-          <Link href="/admin/students/create" passHref>
+          <Link href="/admin/instructors/create" passHref>
             <Button
               variant="contained"
               color="primary"
               startIcon={<BiPlusMedical size={14} />}
             >
-              Create New Studente
+              Create New Instructors
             </Button>
           </Link>
         </Box>
@@ -257,7 +251,7 @@ export default function BlogPage() {
                   fieldName="title"
                   justifyContent="center"
                 >
-                  <strong>Title</strong>
+                  <strong>Name</strong>
                 </SortTable>
               </StyledTableCell>
               <StyledTableCell>
@@ -269,8 +263,7 @@ export default function BlogPage() {
                 >
                   <strong>Identifier</strong>
                 </SortTable>
-              </StyledTableCell>
-              
+              </StyledTableCell>              
 
               <StyledTableCell>
                 <strong>Content</strong>
@@ -319,7 +312,7 @@ export default function BlogPage() {
                     {isPending ? (
                       <span>Loading...</span>
                     ) : (
-                      <span>No students found</span>
+                      <span>No instructors found</span>
                     )}
                   </Typography>
                 </StyledTableCell>
@@ -367,18 +360,18 @@ export default function BlogPage() {
                         />
                       )}
                     </StyledTableCell>
-                    <StyledTableCell>{post.title}</StyledTableCell>
+                    <StyledTableCell>{post.name}</StyledTableCell>
                     <StyledTableCell>
                       <Link
                         target="_blank"
-                        href={`/students/${post.identifier}`}
+                        href={`/instructors/${post.identifier}`}
                         passHref
                         style={{ fontSize: "14px" }}
                       >
                         /{post.identifier}
                       </Link>
                     </StyledTableCell>
-                   
+                    
                     <StyledTableCell>
                       {post.content && post.content.length > 30
                         ? post.content.slice(0, 30) + "..."
@@ -434,7 +427,7 @@ export default function BlogPage() {
                     </StyledTableCell>
                     <StyledTableCell align="center">
                       <Link
-                        href={`/admin/students/edit/${post.identifier}`}
+                        href={`/admin/instructors/edit/${post.identifier}`}
                         passHref
                       >
                         <IconButton color="primary" size="small">
