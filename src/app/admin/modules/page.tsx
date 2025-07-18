@@ -20,9 +20,9 @@ import {
 } from "@mui/material";
 import SortTable from "@components/ui/sort-table";
 import { dynamicSort } from "@utils/dynamic-sort";
-import { useModulesQuery } from "@/data/module/use-module.query";
-import AddModuleModal from "@/components/modules/add-module-modal";
-import ModulesList from "@/components/modules/modules-list";
+import { useModulesQuery } from "@data/module/use-module.query";
+import AddModuleModal from "@components/modules/add-module-modal";
+import ModulesList from "@components/modules/modules-list";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

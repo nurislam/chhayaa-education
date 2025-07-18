@@ -41,13 +41,29 @@ const useCreateModulesMutation = () => {
 };
 
 const deleteModulesById = async (params: any) => {
+
   return Modules.patchUpdate(`${API_ENDPOINTS.MODULES}/${params.id}`, params.input);
 };
 
-const useDeleteModulesMutation = (): ReturnType<typeof useMutation<number, unknown, number, unknown>> => {
-  return useMutation<number, unknown, number>({
+// const useDeleteModulesMutation = (): ReturnType<typeof useMutation<number, unknown, number, unknown>> => {
+  
+  
+//   return useMutation<number, unknown, number>({
+//     mutationFn: (id: number) => {
+//       console.log(id);
+//       return deleteModulesById(id);
+//     },
+//   });
+// };
+
+const useDeleteModulesMutation = (localContext?: any) => {
+  const endpoint = localContext
+    ? LOCAL_ENDPOINTS.MODULES
+    : API_ENDPOINTS.MODULES;
+
+  return useMutation({
     mutationFn: (id: number) => {
-      return deleteModulesById(id);
+      return Modules.delete(`${endpoint}/${id}`);
     },
   });
 };

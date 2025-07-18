@@ -6,7 +6,7 @@ import moment from "moment";
 import { TableCell, TableRow, IconButton, tableCellClasses } from "@mui/material";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useDeleteModulesMutation } from "@/data/module/use-module.query";
+import { useDeleteModulesMutation } from "@data/module/use-module.query";
 import UpdateModuleModal from "./update-module-modal";
 import DynamicIcon from "../ui/dynamic-icon";
 
