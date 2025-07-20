@@ -39,6 +39,7 @@ const schema = Yup.object({
   categoryDescription: Yup.string().required(
     "Category Description is required"
   ),
+  cat_icon: Yup.string().optional(),
   identifier: Yup.string().optional(),
 });
 
@@ -78,6 +79,7 @@ const CreateCategory: React.FC<CreateCategoryProps> = ({
     defaultValues: {
       categoryName: "",
       categoryDescription: "",
+      cat_icon: "",
       identifier: "",
     },
   });
@@ -93,6 +95,7 @@ const CreateCategory: React.FC<CreateCategoryProps> = ({
   const onSubmit = (data: any) => {
     const newCategory: any = {
       categoryName: data.categoryName,
+      cat_icon: data.cat_icon,
       categoryDescription: data.categoryDescription,
       identifier: data.identifier ? data.identifier : identifierAuto,
       createdBy: userId,
@@ -224,6 +227,13 @@ const CreateCategory: React.FC<CreateCategoryProps> = ({
               register={register}
               error={errors.categoryDescription?.message}
               helperText={errors.categoryDescription?.message}
+            />
+            <OutlinedInputField
+              name="cat_icon"
+              label="Category Icon"
+              register={register}
+              error={errors.cat_icon?.message}
+              helperText={errors.cat_icon?.message}
             />
             <CustomCheckbox
               onChange={setIsSubcategory}
